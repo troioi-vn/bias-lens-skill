@@ -1,6 +1,6 @@
 ---
 name: bias-lens
-description: Use when the user asks to check a text, draft, article, message or conversation for cognitive biases, cognitive distortions or logical fallacies, or to scan, highlight or flag reasoning that looks biased. Matches each reasoning step against a regularly updated bias catalog, quotes the flagged passages and gives a concrete check for each. Not for stereotype or fairness audits of content about groups, AI model or dataset bias, or risk-of-bias ratings of research studies. Needs python3 and read-only access to a free public catalog API; the client never sends the text being checked.
+description: Use when the user asks to check a text, draft, article, message or conversation for cognitive biases, cognitive distortions or logical fallacies, or to scan, highlight or flag reasoning that looks biased. Matches each reasoning step against a regularly updated bias catalog, quotes the flagged passages and gives a concrete check for each. Not for stereotype or fairness audits of content about groups, AI model or dataset bias, political-bias ratings of news outlets, risk-of-bias ratings of research studies, or fact-checking claims against sources. Needs python3 and read-only access to a free public catalog API; the client never sends the text being checked.
 metadata: {"openclaw": {"requires": {"bins": ["python3"]}}}
 allowed-tools: Read Bash(python3:*)
 ---
@@ -63,11 +63,11 @@ Check: If you were starting today with no history, would you choose this?
 Strength: clear / possible
 ```
 
-- **Step** names the inference in the text, not a trait of the writer.
+- **Step** names the inference in the text, not a trait of the writer. When the text's main conclusion rests on this step, say so; a slip in a side remark matters less than one the argument depends on.
 - **Check** is a concrete test the reader can run, in the spirit of the catalog examples. Not a confession, not "be aware of your biases".
 - **Strength:** `clear` when the passage only makes sense with this shortcut, `possible` when a reasonable reading avoids it. With `possible`, add the reasonable reading in a few words (for example "every essay chooses its words; this frame is the genre").
 - When a qualification sentence nearly applies, write the Check so it uses that sentence: name the case where the bias would not apply, then ask whether this passage is that case.
-- At most five main findings per speaker, strongest first, with no quota to fill. For conversations, group findings by speaker with unique reference numbers across the report; briefly account for a speaker with no findings so silence does not look like skipped coverage.
+- At most five main findings per speaker, with no quota to fill. Put `clear` findings before `possible` ones, and steps the main conclusion rests on before side remarks. For conversations, group findings by speaker with unique reference numbers across the report; briefly account for a speaker with no findings so silence does not look like skipped coverage.
 
 After the findings, add these short sections. Skip any that would be empty:
 
@@ -87,6 +87,7 @@ Before handing over the report, check it:
 - [ ] No speaker has more than five main findings, and cut findings are counted under **Left out**.
 - [ ] Corrected past reasoning sits under **Self-corrections**, not among the findings.
 - [ ] The catalog version is recorded, and `--offline` use is disclosed.
+- [ ] Every speaker and side was held to the same standard, including the one whose conclusion you agree with. If the findings land on one side only, the text should explain why, not your own view.
 - [ ] Nothing in the report describes the author's character or mental health.
 
 ## The script
@@ -97,6 +98,7 @@ Before handing over the report, check it:
 
 - The catalog describes thinking habits. A text shows only what someone wrote, so findings are possible patterns, not diagnoses.
 - Never treat religious identity, distress, disagreement or a mistaken fact as evidence of a bias.
+- If the user shares their own painful thoughts while upset, respond to them first. Offer the reading only when they ask for it or agree to it, and never as treatment.
 - The catalog is read-only here. Do not edit bias entries while running this skill; suggest catalog changes separately if a gap shows up.
 
 ## Improving the skill
