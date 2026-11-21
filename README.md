@@ -84,9 +84,12 @@ The API only serves the catalog. It accepts no text, does no matching and
 stores nothing you send. Responses carry an ETag and may be cached for five
 minutes, so fetch once per session and revalidate with `If-None-Match`.
 Browse the same entries at [tarot.catarchy.space/biases](https://tarot.catarchy.space/biases/).
+The full description is at [tarot.catarchy.space/biases/api](https://tarot.catarchy.space/biases/api/).
 
-Reading and linking to entries is free. The API does not grant a license to
-republish the catalog text, so link to entry pages rather than copying them.
+The catalog text is licensed
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). You can share
+and adapt it if you credit "Catastrophic Thinking bias catalog" with a link and
+release adaptations under the same license.
 
 ## Development
 
@@ -101,5 +104,5 @@ The tests use a temporary local HTTP server and synthetic catalog data.
 ## License
 
 The skill instructions, client and tests in this repository use the
-[MIT license](LICENSE). Catalog text is fetched separately and is not included in
-this repository. This license does not grant rights to redistribute that text.
+[MIT license](LICENSE). Catalog text is fetched separately, is not included in
+this repository, and is licensed CC BY-SA 4.0 by its publisher.
