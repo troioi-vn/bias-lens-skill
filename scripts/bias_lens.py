@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read the public Catastrophic Thinking catalog. Python standard library only."""
+"""Read the public, regularly updated bias catalog. Python standard library only."""
 import argparse
 import hashlib
 import json

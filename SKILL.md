@@ -1,6 +1,7 @@
 ---
 name: bias-lens
-description: Highlight passages whose reasoning resembles a cognitive bias, distortion or fallacy from the Catastrophic Thinking catalog. Use when asked to check, scan or highlight these patterns in a text, draft, article, message or conversation.
+description: Use when the user asks to check a text, draft, article, message or conversation for cognitive biases, cognitive distortions or logical fallacies, or to scan, highlight or flag reasoning that looks biased. Matches each reasoning step against a regularly updated bias catalog, quotes the flagged passages and gives a concrete check for each.
+metadata: {"openclaw": {"requires": {"bins": ["python3"]}}}
 ---
 
 # Bias lens

@@ -1,9 +1,9 @@
 # Bias lens
 
 An agent skill for spotting passages whose reasoning resembles a cognitive bias,
-cognitive distortion or logical fallacy. It reads the public
-[Catastrophic Thinking catalog](https://tarot.catarchy.space/biases/), quotes the
-reasoning step, and suggests a concrete way to check it.
+cognitive distortion or logical fallacy. It reads a public, regularly updated
+[bias catalog](https://tarot.catarchy.space/biases/), quotes the reasoning step,
+and suggests a concrete way to check it.
 
 Findings concern the reasoning in a passage, not the author's character or mental
 health. The reader can reject a match. No findings is a valid result.
