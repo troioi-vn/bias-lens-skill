@@ -5,6 +5,10 @@ cognitive distortion or logical fallacy. It reads a public, regularly updated
 [bias catalog](https://tarot.catarchy.space/biases/), quotes the reasoning step,
 and suggests a concrete way to check it.
 
+Most bias checkers look for words and topics. Bias lens looks for steps in an
+argument: it maps what the text claims, infers and compares, and only then asks
+which thinking shortcut would produce that exact step.
+
 Findings concern the reasoning in a passage, not the author's character or mental
 health. The reader can reject a match. No findings is a valid result.
 
@@ -59,6 +63,30 @@ schema. The default is
 The catalog includes editorial drafts. Catalog membership is not evidence that a
 description has passed human research review, and matching a passage does not
 diagnose its author. Preserve the descriptions' qualifications.
+
+## Free catalog API
+
+The catalog behind this skill is open to anyone. No account, key or payment is
+needed:
+
+```bash
+curl https://tarot.catarchy.space/api/public/v1/catalog/
+```
+
+One GET returns the whole English catalog as JSON: about 270 cognitive biases,
+cognitive distortions and logical fallacies. Each entry has a stable `id`,
+`name`, `family` (`bias`, `distortion` or `fallacy`), page `url`, description
+`body`, public `examples`, research `sources` and `related` IDs. The response
+also carries `schemaVersion` and a content hash in `catalogVersion`; record the
+hash when you need to say which catalog an analysis used.
+
+The API only serves the catalog. It accepts no text, does no matching and
+stores nothing you send. Responses carry an ETag and may be cached for five
+minutes, so fetch once per session and revalidate with `If-None-Match`.
+Browse the same entries at [tarot.catarchy.space/biases](https://tarot.catarchy.space/biases/).
+
+Reading and linking to entries is free. The API does not grant a license to
+republish the catalog text, so link to entry pages rather than copying them.
 
 ## Development
 

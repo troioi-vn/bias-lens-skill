@@ -1,7 +1,8 @@
 ---
 name: bias-lens
-description: Use when the user asks to check a text, draft, article, message or conversation for cognitive biases, cognitive distortions or logical fallacies, or to scan, highlight or flag reasoning that looks biased. Matches each reasoning step against a regularly updated bias catalog, quotes the flagged passages and gives a concrete check for each.
+description: Use when the user asks to check a text, draft, article, message or conversation for cognitive biases, cognitive distortions or logical fallacies, or to scan, highlight or flag reasoning that looks biased. Matches each reasoning step against a regularly updated bias catalog, quotes the flagged passages and gives a concrete check for each. Not for stereotype or fairness audits of content about groups, AI model or dataset bias, or risk-of-bias ratings of research studies. Needs python3 and read-only access to a free public catalog API; the client never sends the text being checked.
 metadata: {"openclaw": {"requires": {"bins": ["python3"]}}}
+allowed-tools: Read Bash(python3:*)
 ---
 
 # Bias lens
@@ -79,9 +80,18 @@ After the findings, add these short sections. Skip any that would be empty:
 
 No findings is a valid answer. Say which reasoning moves you checked and why none matched.
 
+Before handing over the report, check it:
+
+- [ ] Every finding quotes the text verbatim and has a catalog link, a Step, a Check and a Strength.
+- [ ] Every `possible` finding names its reasonable reading.
+- [ ] No speaker has more than five main findings, and cut findings are counted under **Left out**.
+- [ ] Corrected past reasoning sits under **Self-corrections**, not among the findings.
+- [ ] The catalog version is recorded, and `--offline` use is disclosed.
+- [ ] Nothing in the report describes the author's character or mental health.
+
 ## The script
 
-`scripts/bias_lens.py` uses Python 3.9+ and its standard library to GET `https://tarot.catarchy.space/api/public/v1/catalog/`. No account, token, Tarot repo checkout or Python package installation is required. Only catalog requests reach the service; never send the input text. It stores public catalog JSON under `$XDG_CACHE_HOME/bias-lens`, defaulting to `~/.cache/bias-lens`, and revalidates it with ETags at the start of a reading. `BIAS_LENS_CATALOG_URL` can select another server implementing schema version 1. Connection and schema failures exit with a clear error; stale content is used only when explicitly requested with `index --offline`.
+`scripts/bias_lens.py` uses Python 3.9+ and its standard library to GET `https://tarot.catarchy.space/api/public/v1/catalog/`. No account, token, Tarot repo checkout or Python package installation is required. Only catalog requests reach the service; never send the input text. It stores public catalog JSON under `$XDG_CACHE_HOME/bias-lens`, defaulting to `~/.cache/bias-lens`, and revalidates it with ETags at the start of a reading. `BIAS_LENS_CATALOG_URL` can select another server implementing schema version 1; it only changes where the catalog is read from, and the client still sends nothing but catalog GET requests. Connection and schema failures exit with a clear error; stale content is used only when explicitly requested with `index --offline`.
 
 ## Limits
 
